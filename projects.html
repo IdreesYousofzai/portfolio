@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Projects by Ahmad Idrees Yousofzai — web development, Python, AI, and database projects."/>
+  <title>Projects — Ahmad Idrees</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/css/main.css"/>
+  <link rel="stylesheet" href="assets/css/components.css"/>
+  <style>
+    .projects-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-lg);
+      margin-bottom: var(--space-2xl);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-xl);
+    }
+
+    @media (max-width: 1024px) { .projects-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px)  { .projects-grid { grid-template-columns: 1fr; } }
+
+    .projects-count {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      padding: 0.25rem 0.75rem;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-full);
+    }
+
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: var(--space-4xl);
+      color: var(--text-secondary);
+    }
+
+    .no-results-icon { font-size: 3rem; margin-bottom: var(--space-md); }
+
+    .project-card.hidden { display: none; }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(24px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .project-card.visible {
+      animation: cardIn 0.4s cubic-bezier(0,0,0.2,1) forwards;
+    }
+  </style>
+</head>
+<body>
+  <header id="navbar" role="banner"></header>
+
+  <main id="main-content">
+
+    <!-- Hero -->
+    <section class="page-hero" style="background:var(--bg-secondary)">
+      <div class="page-hero-bg" style="background:radial-gradient(ellipse 70% 60% at 70% 40%, rgba(59,130,246,0.1), transparent 60%)"></div>
+      <div class="container page-hero-content">
+        <div class="section-label hero-reveal">Portfolio</div>
+        <h1 class="text-headline hero-reveal" data-delay="80">
+          Projects I've <span style="color:var(--accent)">Built</span>
+        </h1>
+        <p style="color:var(--text-secondary);font-size:1.05rem;max-width:560px;line-height:1.75;margin-top:var(--space-md)" class="hero-reveal" data-delay="160">
+          A growing collection of work spanning web development, Python, AI, and databases. Each project is a lesson learned and a problem solved.
+        </p>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="section" style="background:var(--bg-primary)">
+      <div class="container">
+        <!-- Controls -->
+        <div class="projects-controls">
+          <div class="filter-tabs" id="filter-tabs" role="group" aria-label="Filter projects by category">
+            <button class="filter-tab active" data-filter="all">All</button>
+            <button class="filter-tab" data-filter="Web Development">Web Dev</button>
+            <button class="filter-tab" data-filter="Python">Python</button>
+            <button class="filter-tab" data-filter="JavaScript">JavaScript</button>
+            <button class="filter-tab" data-filter="AI">AI</button>
+            <button class="filter-tab" data-filter="Database">Database</button>
+            <button class="filter-tab" data-filter="College Projects">College</button>
+            <button class="filter-tab" data-filter="Personal Projects">Personal</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:var(--space-md)">
+            <div class="search-wrap">
+              <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+              <input type="search" class="search-input" id="project-search" placeholder="Search projects..." aria-label="Search projects"/>
+            </div>
+            <div class="projects-count" id="projects-count" aria-live="polite">0 projects</div>
+          </div>
+        </div>
+
+        <!-- Grid -->
+        <div class="projects-grid" id="projects-grid" aria-label="Projects" aria-live="polite"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer role="contentinfo"></footer>
+
+  <script type="module">
+    import { initTheme, initCursor, initScrollProgress, initNavbar, initBackToTop, fetchData, debounce } from './assets/js/main.js';
+    import { injectLayout } from './assets/js/layout.js';
+    import { initCommandPalette } from './assets/js/command-palette.js';
+    import { initHeroReveal, initTilt } from './assets/js/animations.js';
+
+    injectLayout();
+    initTheme();
+    initNavbar();
+    initScrollProgress();
+    initBackToTop();
+    initCommandPalette();
+    initCursor();
+    initHeroReveal();
+
+    let allProjects = [];
+    let activeFilter = 'all';
+    let searchQuery  = '';
+
+    async function init() {
+      allProjects = await fetchData('assets/data/projects.json') || [];
+      render();
+      initTilt();
+    }
+
+    function render() {
+      const grid = document.getElementById('projects-grid');
+      const count = document.getElementById('projects-count');
+      if (!grid) return;
+
+      let filtered = allProjects;
+
+      if (activeFilter !== 'all') {
+        filtered = filtered.filter(p => p.category.includes(activeFilter));
+      }
+
+      if (searchQuery) {
+        const q = searchQuery.toLowerCase();
+        filtered = filtered.filter(p =>
+          p.title.toLowerCase().includes(q) ||
+          p.description.toLowerCase().includes(q) ||
+          p.tags.some(t => t.toLowerCase().includes(q))
+        );
+      }
+
+      if (count) count.textContent = `${filtered.length} project${filtered.length !== 1 ? 's' : ''}`;
+
+      if (!filtered.length) {
+        grid.innerHTML = `
+          <div class="no-results">
+            <div class="no-results-icon">🔍</div>
+            <p style="font-size:1rem;font-weight:600;margin-bottom:.5rem">No projects found</p>
+            <p style="font-size:.85rem">Try a different filter or search term.</p>
+          </div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map((p, i) => projectCard(p, i)).join('');
+      // Animate in
+      grid.querySelectorAll('.project-card').forEach((card, i) => {
+        card.style.animationDelay = `${i * 60}ms`;
+        card.classList.add('visible');
+      });
+      initTilt();
+    }
+
+    // Filter tabs
+    document.getElementById('filter-tabs')?.addEventListener('click', (e) => {
+      const tab = e.target.closest('.filter-tab');
+      if (!tab) return;
+      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      activeFilter = tab.dataset.filter;
+      render();
+    });
+
+    // Search
+    document.getElementById('project-search')?.addEventListener('input', debounce((e) => {
+      searchQuery = e.target.value.trim();
+      render();
+    }, 200));
+
+    function projectCard(p) {
+      const statusBadge = p.status === 'completed'
+        ? '<span class="badge badge-completed">● Completed</span>'
+        : '<span class="badge badge-progress">● In Progress</span>';
+
+      return `
+        <article class="project-card" data-tilt aria-label="${p.title}">
+          <div class="project-thumb">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <rect x="4" y="8" width="40" height="32" rx="4"/><path d="M4 16h40"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><circle cx="18" cy="12" r="1.5" fill="currentColor"/><circle cx="24" cy="12" r="1.5" fill="currentColor"/>
+            </svg>
+            <div class="project-thumb-overlay">
+              ${p.demo ? `<a href="${p.demo}" target="_blank" rel="noopener" class="btn btn-primary" style="padding:.4rem 1rem;font-size:.75rem">Live Demo</a>` : ''}
+              <a href="${p.github}" target="_blank" rel="noopener" class="btn btn-outline" style="padding:.4rem 1rem;font-size:.75rem;color:#fff">GitHub</a>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-top">
+              <h2 class="project-title">${p.title}</h2>
+              ${p.featured ? '<span class="badge badge-featured">⭐ Featured</span>' : ''}
+            </div>
+            <p class="project-desc">${p.description}</p>
+            <div class="project-tags">
+              ${p.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+            </div>
+          </div>
+          <div class="project-footer">
+            ${statusBadge}
+            <div class="project-links">
+              <a href="${p.github}" target="_blank" rel="noopener" class="project-link" aria-label="View on GitHub">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="13" height="13"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                GitHub
+              </a>
+              ${p.demo ? `<a href="${p.demo}" target="_blank" rel="noopener" class="project-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Demo
+              </a>` : ''}
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    init();
+  </script>
+</body>
+</html>

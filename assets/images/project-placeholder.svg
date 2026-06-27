@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#131A29;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#0B0F19;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#8B5CF6;stop-opacity:1"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bg)"/>
+
+  <!-- Grid lines -->
+  <g stroke="rgba(148,163,184,0.04)" stroke-width="1">
+    <line x1="0" y1="75" x2="800" y2="75"/>
+    <line x1="0" y1="150" x2="800" y2="150"/>
+    <line x1="0" y1="225" x2="800" y2="225"/>
+    <line x1="0" y1="300" x2="800" y2="300"/>
+    <line x1="0" y1="375" x2="800" y2="375"/>
+    <line x1="100" y1="0" x2="100" y2="450"/>
+    <line x1="200" y1="0" x2="200" y2="450"/>
+    <line x1="300" y1="0" x2="300" y2="450"/>
+    <line x1="400" y1="0" x2="400" y2="450"/>
+    <line x1="500" y1="0" x2="500" y2="450"/>
+    <line x1="600" y1="0" x2="600" y2="450"/>
+    <line x1="700" y1="0" x2="700" y2="450"/>
+  </g>
+
+  <!-- Fake browser chrome -->
+  <rect x="60" y="50" width="680" height="350" rx="12" fill="rgba(19,26,41,0.9)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <!-- Title bar -->
+  <rect x="60" y="50" width="680" height="36" rx="12" fill="rgba(11,15,25,0.8)"/>
+  <rect x="60" y="72" width="680" height="14" fill="rgba(11,15,25,0.8)"/>
+  <!-- Traffic lights -->
+  <circle cx="88"  cy="68" r="6" fill="#FF5F57"/>
+  <circle cx="108" cy="68" r="6" fill="#FEBC2E"/>
+  <circle cx="128" cy="68" r="6" fill="#28C840"/>
+  <!-- URL bar -->
+  <rect x="160" y="58" width="340" height="20" rx="10" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="330" y="73" text-anchor="middle" fill="rgba(148,163,184,0.5)" font-family="monospace" font-size="11">localhost:3000</text>
+
+  <!-- Content area simulation -->
+  <!-- Nav bar inside browser -->
+  <rect x="76" y="102" width="648" height="40" rx="6" fill="rgba(255,255,255,0.02)"/>
+  <rect x="92" y="115" width="60" height="14" rx="4" fill="url(#accent)" opacity="0.8"/>
+  <rect x="180" y="118" width="40" height="8" rx="3" fill="rgba(148,163,184,0.2)"/>
+  <rect x="232" y="118" width="40" height="8" rx="3" fill="rgba(148,163,184,0.2)"/>
+  <rect x="284" y="118" width="40" height="8" rx="3" fill="rgba(148,163,184,0.2)"/>
+  <rect x="630" y="113" width="80" height="18" rx="9" fill="url(#accent)" opacity="0.6"/>
+
+  <!-- Hero section lines -->
+  <rect x="92" y="162" width="280" height="28" rx="6" fill="rgba(248,250,252,0.15)"/>
+  <rect x="92" y="200" width="220" height="28" rx="6" fill="url(#accent)" opacity="0.6"/>
+  <rect x="92" y="238" width="320" height="12" rx="4" fill="rgba(148,163,184,0.15)"/>
+  <rect x="92" y="258" width="280" height="12" rx="4" fill="rgba(148,163,184,0.1)"/>
+  <rect x="92" y="278" width="240" height="12" rx="4" fill="rgba(148,163,184,0.1)"/>
+  <!-- Buttons -->
+  <rect x="92" y="304" width="100" height="30" rx="15" fill="url(#accent)" opacity="0.8"/>
+  <rect x="204" y="304" width="100" height="30" rx="15" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+
+  <!-- Right column (decorative shapes) -->
+  <g filter="url(#glow)" opacity="0.5">
+    <polygon points="560,150 620,200 560,250 500,200" fill="none" stroke="url(#accent)" stroke-width="1.5"/>
+    <circle cx="620" cy="300" r="35" fill="none" stroke="rgba(59,130,246,0.6)" stroke-width="1.5"/>
+    <polygon points="480,270 510,320 450,320" fill="none" stroke="rgba(139,92,246,0.6)" stroke-width="1.5"/>
+    <rect x="620" y="150" width="50" height="50" rx="8" fill="none" stroke="rgba(59,130,246,0.4)" stroke-width="1" transform="rotate(15, 645, 175)"/>
+  </g>
+
+  <!-- Card grid at bottom -->
+  <rect x="92" y="345" width="130" height="45" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  <rect x="237" y="345" width="130" height="45" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  <rect x="382" y="345" width="130" height="45" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+
+  <!-- Bottom accent line -->
+  <rect x="60" y="396" width="680" height="2" rx="1" fill="url(#accent)" opacity="0.3"/>
+
+  <!-- Corner glow -->
+  <ellipse cx="0" cy="0" rx="180" ry="120" fill="rgba(59,130,246,0.06)"/>
+  <ellipse cx="800" cy="450" rx="180" ry="120" fill="rgba(139,92,246,0.06)"/>
+</svg>

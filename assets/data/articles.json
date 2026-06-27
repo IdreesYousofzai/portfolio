@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "title": "Why T-Level Students Are the Future of Tech Apprenticeships",
+    "excerpt": "A first-hand perspective on how the T-Level qualification bridges academic learning with real industry experience, and why employers should pay attention.",
+    "date": "2025-03-15",
+    "readTime": 5,
+    "category": "Career",
+    "tags": ["T-Level", "Apprenticeship", "Career", "Education"],
+    "featured": true
+  },
+  {
+    "id": 2,
+    "title": "Building My First Full-Stack Application: Lessons Learned",
+    "excerpt": "What I discovered when building a real-world web application from scratch — from database design to deployment, and every frustrating bug in between.",
+    "date": "2025-02-20",
+    "readTime": 8,
+    "category": "Development",
+    "tags": ["Full-Stack", "Python", "JavaScript", "Learning"],
+    "featured": true
+  },
+  {
+    "id": 3,
+    "title": "Getting Started with AI Development as a Student",
+    "excerpt": "How I began integrating AI APIs into my projects, the tools I used, and what I wish someone had told me before I started.",
+    "date": "2025-01-10",
+    "readTime": 6,
+    "category": "AI",
+    "tags": ["AI", "OpenAI", "Python", "Beginner"],
+    "featured": true
+  },
+  {
+    "id": 4,
+    "title": "My Work Placement at Shout Connect: Month One",
+    "excerpt": "Reflections on my first month at Shout Connect — what real workplace development looks like, the challenges I faced, and the skills I've gained.",
+    "date": "2026-02-01",
+    "readTime": 7,
+    "category": "Experience",
+    "tags": ["Work Placement", "Professional Development", "Shout Connect"],
+    "featured": false
+  },
+  {
+    "id": 5,
+    "title": "CSS Grid vs Flexbox: When to Use Which",
+    "excerpt": "A practical breakdown of when to reach for CSS Grid versus Flexbox, with real examples from my own projects and the reasoning behind each choice.",
+    "date": "2024-11-05",
+    "readTime": 4,
+    "category": "Tutorial",
+    "tags": ["CSS", "Flexbox", "Grid", "Tutorial"],
+    "featured": false
+  }
+]

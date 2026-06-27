@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Articles and writing by Ahmad Idrees Yousofzai — career advice, development tutorials and tech insights."/>
+  <title>Articles — Ahmad Idrees</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/css/main.css"/>
+  <link rel="stylesheet" href="assets/css/components.css"/>
+  <style>
+    .articles-layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: var(--space-4xl);
+      align-items: start;
+    }
+
+    @media (max-width: 960px) { .articles-layout { grid-template-columns: 1fr; } }
+
+    /* Featured article (first card is bigger) */
+    .article-card-featured {
+      background: var(--bg-card);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-2xl);
+      backdrop-filter: blur(12px);
+      transition: all var(--duration-base) var(--ease-smooth);
+      cursor: none;
+      margin-bottom: var(--space-xl);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .article-card-featured::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(59,130,246,0.04), transparent 60%);
+      pointer-events: none;
+    }
+
+    .article-card-featured:hover {
+      border-color: var(--border-hover);
+      box-shadow: var(--shadow-glow), var(--shadow-md);
+      transform: translateY(-4px);
+    }
+
+    .article-card-featured .article-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      margin-bottom: var(--space-sm);
+    }
+
+    .article-card-featured .article-excerpt {
+      font-size: 0.95rem;
+      line-height: 1.75;
+    }
+
+    .article-list { display: flex; flex-direction: column; gap: var(--space-lg); }
+
+    .article-card {
+      background: var(--bg-card);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      backdrop-filter: blur(12px);
+      transition: all var(--duration-base) var(--ease-smooth);
+      cursor: none;
+    }
+
+    .article-card:hover {
+      border-color: var(--border-hover);
+      box-shadow: var(--shadow-glow), var(--shadow-md);
+      transform: translateY(-3px);
+    }
+
+    .article-card .article-title {
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.35;
+      margin-bottom: var(--space-xs);
+      transition: color var(--duration-fast);
+    }
+
+    .article-card:hover .article-title,
+    .article-card-featured:hover .article-title { color: var(--accent); }
+
+    /* Sidebar */
+    .sidebar-widget {
+      background: var(--bg-card);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-xl);
+      backdrop-filter: blur(12px);
+      margin-bottom: var(--space-lg);
+    }
+
+    .sidebar-widget-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      margin-bottom: var(--space-lg);
+    }
+
+    .category-list { display: flex; flex-direction: column; gap: var(--space-xs); }
+
+    .category-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 0.75rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      transition: all var(--duration-fast);
+      cursor: none;
+    }
+
+    .category-link:hover, .category-link.active {
+      background: var(--accent-glow);
+      color: var(--accent);
+    }
+
+    .category-count {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-full);
+      padding: 0.1rem 0.5rem;
+    }
+
+    .tag-cloud { display: flex; flex-wrap: wrap; gap: var(--space-xs); }
+
+    .coming-soon-card {
+      background: linear-gradient(135deg, var(--bg-card), var(--bg-secondary));
+      border: 1px dashed var(--border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-2xl);
+      text-align: center;
+      color: var(--text-secondary);
+    }
+
+    .coming-soon-icon { font-size: 2rem; margin-bottom: var(--space-md); opacity: 0.5; }
+
+    @keyframes articleIn {
+      from { opacity:0; transform:translateY(16px); }
+      to   { opacity:1; transform:none; }
+    }
+  </style>
+</head>
+<body>
+  <header id="navbar" role="banner"></header>
+
+  <main id="main-content">
+
+    <!-- Hero -->
+    <section class="page-hero" style="background:var(--bg-secondary)">
+      <div class="page-hero-bg" style="background:radial-gradient(ellipse 65% 55% at 30% 50%, rgba(59,130,246,0.1), transparent 60%)"></div>
+      <div class="container page-hero-content">
+        <div class="section-label hero-reveal">Writing</div>
+        <h1 class="text-headline hero-reveal" data-delay="80">
+          Articles &<br><span style="color:var(--accent)">Insights</span>
+        </h1>
+        <p style="color:var(--text-secondary);font-size:1.05rem;max-width:520px;line-height:1.75;margin-top:var(--space-md)" class="hero-reveal" data-delay="160">
+          Thoughts on software development, career journeys, AI, and the lessons I've learned along the way. More articles coming regularly.
+        </p>
+      </div>
+    </section>
+
+    <!-- Content -->
+    <section class="section" style="background:var(--bg-primary)">
+      <div class="container">
+
+        <!-- Search + filter bar -->
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-lg);margin-bottom:var(--space-2xl)">
+          <div class="search-wrap" style="max-width:340px">
+            <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="search" class="search-input" id="article-search" placeholder="Search articles..." aria-label="Search articles"/>
+          </div>
+          <div class="filter-tabs" id="article-filters" role="group" aria-label="Filter by category">
+            <button class="filter-tab active" data-filter="all">All</button>
+            <button class="filter-tab" data-filter="Career">Career</button>
+            <button class="filter-tab" data-filter="Development">Development</button>
+            <button class="filter-tab" data-filter="AI">AI</button>
+            <button class="filter-tab" data-filter="Experience">Experience</button>
+            <button class="filter-tab" data-filter="Tutorial">Tutorials</button>
+          </div>
+        </div>
+
+        <div class="articles-layout">
+          <!-- Main feed -->
+          <div>
+            <div id="featured-article-slot"></div>
+            <div class="article-list" id="articles-list" aria-label="Articles" aria-live="polite"></div>
+          </div>
+
+          <!-- Sidebar -->
+          <aside>
+            <!-- About blurb -->
+            <div class="sidebar-widget reveal reveal-right">
+              <div class="sidebar-widget-title">About the Author</div>
+              <div style="display:flex;align-items:center;gap:var(--space-md);margin-bottom:var(--space-md)">
+                <div style="width:46px;height:46px;border-radius:var(--radius-md);background:linear-gradient(135deg,#1E3A8A,#4C1D95);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:1rem;color:#fff;flex-shrink:0">AIY</div>
+                <div>
+                  <div style="font-size:.9rem;font-weight:700">Ahmad Idrees</div>
+                  <div style="font-size:.75rem;color:var(--accent)">T-Level Software Developer</div>
+                </div>
+              </div>
+              <p style="font-size:.82rem;color:var(--text-secondary);line-height:1.7">Writing about my journey learning software development, building projects, and navigating the path to a professional career in tech.</p>
+              <div style="margin-top:var(--space-md)">
+                <a href="about.html" class="btn btn-outline" style="font-size:.8rem;padding:.4rem 1rem">Read My Story →</a>
+              </div>
+            </div>
+
+            <!-- Categories -->
+            <div class="sidebar-widget reveal reveal-right" data-delay="80">
+              <div class="sidebar-widget-title">Categories</div>
+              <div class="category-list" id="category-list"></div>
+            </div>
+
+            <!-- Tags -->
+            <div class="sidebar-widget reveal reveal-right" data-delay="160">
+              <div class="sidebar-widget-title">Tags</div>
+              <div class="tag-cloud" id="tag-cloud"></div>
+            </div>
+
+            <!-- Newsletter placeholder -->
+            <div class="coming-soon-card reveal reveal-right" data-delay="240">
+              <div class="coming-soon-icon">📬</div>
+              <p style="font-size:.875rem;font-weight:600;margin-bottom:.4rem">Newsletter</p>
+              <p style="font-size:.78rem;line-height:1.6">Subscribe to get new articles delivered straight to your inbox — coming soon.</p>
+              <div style="margin-top:var(--space-lg)">
+                <input type="email" class="form-input" placeholder="your@email.com" aria-label="Email for newsletter" style="margin-bottom:var(--space-sm)"/>
+                <button class="btn btn-primary" style="width:100%" onclick="showNotify()">Notify Me</button>
+              </div>
+            </div>
+
+          </aside>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer role="contentinfo"></footer>
+
+  <script type="module">
+    import { initTheme, initCursor, initScrollProgress, initNavbar, initBackToTop, fetchData, debounce, showToast } from './assets/js/main.js';
+    import { injectLayout } from './assets/js/layout.js';
+    import { initCommandPalette } from './assets/js/command-palette.js';
+    import { initHeroReveal, initTilt } from './assets/js/animations.js';
+    import { initReveal } from './assets/js/main.js';
+
+    injectLayout();
+    initTheme();
+    initNavbar();
+    initScrollProgress();
+    initBackToTop();
+    initCommandPalette();
+    initCursor();
+    initHeroReveal();
+    initReveal();
+
+    let allArticles = [];
+    let activeFilter = 'all';
+    let searchQuery  = '';
+
+    window.showNotify = () => showToast('📬 You\'ll be notified when the newsletter launches!');
+
+    async function init() {
+      allArticles = await fetchData('assets/data/articles.json') || [];
+      renderCategoryList();
+      renderTagCloud();
+      render();
+    }
+
+    function render() {
+      const featuredSlot = document.getElementById('featured-article-slot');
+      const list         = document.getElementById('articles-list');
+      if (!list) return;
+
+      let filtered = allArticles;
+      if (activeFilter !== 'all') filtered = filtered.filter(a => a.category === activeFilter);
+      if (searchQuery) {
+        const q = searchQuery.toLowerCase();
+        filtered = filtered.filter(a =>
+          a.title.toLowerCase().includes(q) ||
+          a.excerpt.toLowerCase().includes(q) ||
+          a.tags.some(t => t.toLowerCase().includes(q))
+        );
+      }
+
+      if (!filtered.length) {
+        featuredSlot.innerHTML = '';
+        list.innerHTML = `<div style="text-align:center;padding:3rem;color:var(--text-secondary)"><div style="font-size:2.5rem;margin-bottom:1rem">🔍</div><p>No articles match your search.</p></div>`;
+        return;
+      }
+
+      const [first, ...rest] = filtered;
+
+      // Featured card
+      if (featuredSlot) {
+        featuredSlot.innerHTML = `
+          <article class="article-card-featured reveal" aria-label="${first.title}">
+            <div class="article-meta">
+              <span class="article-category">${first.category}</span>
+              <span>${formatDate(first.date)}</span>
+              <span>📖 ${first.readTime} min read</span>
+            </div>
+            <h2 class="article-title">${first.title}</h2>
+            <p class="article-excerpt">${first.excerpt}</p>
+            <div class="article-tags" style="margin-top:var(--space-md)">
+              ${first.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+            </div>
+            <div style="margin-top:var(--space-lg)">
+              <span class="btn btn-ghost" style="padding:0;color:var(--accent);font-size:.875rem">Read article → <em style="font-style:normal;font-size:.7rem;color:var(--text-secondary)">(coming soon)</em></span>
+            </div>
+          </article>
+        `;
+      }
+
+      list.innerHTML = rest.map((a, i) => `
+        <article class="article-card reveal" data-delay="${i * 60}" aria-label="${a.title}" style="animation:articleIn .4s ${i*60}ms ease both">
+          <div class="article-meta">
+            <span class="article-category">${a.category}</span>
+            <span>${formatDate(a.date)}</span>
+            <span>📖 ${a.readTime} min read</span>
+          </div>
+          <h2 class="article-title">${a.title}</h2>
+          <p class="article-excerpt">${a.excerpt}</p>
+          <div class="article-tags">
+            ${a.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+          </div>
+        </article>
+      `).join('');
+
+      initReveal();
+    }
+
+    function renderCategoryList() {
+      const categories = {};
+      allArticles.forEach(a => { categories[a.category] = (categories[a.category] || 0) + 1; });
+      const list = document.getElementById('category-list');
+      if (!list) return;
+      list.innerHTML = Object.entries(categories).map(([cat, count]) => `
+        <button class="category-link" data-cat="${cat}">
+          <span>${cat}</span>
+          <span class="category-count">${count}</span>
+        </button>
+      `).join('');
+      list.querySelectorAll('.category-link').forEach(btn => {
+        btn.addEventListener('click', () => {
+          // sync with main filter tabs
+          const filterTab = document.querySelector(`.filter-tab[data-filter="${btn.dataset.cat}"]`);
+          filterTab?.click();
+          list.querySelectorAll('.category-link').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+        });
+      });
+    }
+
+    function renderTagCloud() {
+      const tags = new Set();
+      allArticles.forEach(a => a.tags.forEach(t => tags.add(t)));
+      const cloud = document.getElementById('tag-cloud');
+      if (!cloud) return;
+      cloud.innerHTML = [...tags].map(t => `
+        <button class="tag" style="cursor:pointer" onclick="filterByTag('${t}')">${t}</button>
+      `).join('');
+    }
+
+    window.filterByTag = (tag) => {
+      const q = document.getElementById('article-search');
+      if (q) { q.value = tag; searchQuery = tag; render(); }
+    };
+
+    document.getElementById('article-filters')?.addEventListener('click', e => {
+      const tab = e.target.closest('.filter-tab');
+      if (!tab) return;
+      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      activeFilter = tab.dataset.filter;
+      render();
+    });
+
+    document.getElementById('article-search')?.addEventListener('input', debounce(e => {
+      searchQuery = e.target.value.trim();
+      render();
+    }, 200));
+
+    function formatDate(str) {
+      return new Date(str).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+    }
+
+    function initReveal() {
+      document.querySelectorAll('.reveal:not(.is-visible)').forEach(el => {
+        const obs = new IntersectionObserver(([entry]) => {
+          if (entry.isIntersecting) {
+            const d = el.dataset.delay || 0;
+            setTimeout(() => el.classList.add('is-visible'), d);
+            obs.unobserve(el);
+          }
+        }, { threshold: 0.1 });
+        obs.observe(el);
+      });
+    }
+
+    init();
+  </script>
+</body>
+</html>

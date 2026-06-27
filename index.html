@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Ahmad Idrees Yousofzai — T-Level Software Development student, web developer and problem solver based in Preston, UK. Seeking software development apprenticeships."/>
+  <meta name="keywords" content="Ahmad Idrees, software developer, web developer, T-Level, apprenticeship, Preston, portfolio"/>
+  <meta property="og:title"       content="Ahmad Idrees Yousofzai — Developer Portfolio"/>
+  <meta property="og:description" content="T-Level Software Development student seeking apprenticeships. Specialising in web development, Python and AI."/>
+  <meta property="og:type"        content="website"/>
+  <title>Ahmad Idrees Yousofzai — Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/css/main.css"/>
+  <link rel="stylesheet" href="assets/css/components.css"/>
+  <style>
+    /* ── Hero ─────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding-top: var(--nav-height);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .hero-gradient {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 60% 30%, rgba(59,130,246,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 20% 70%, rgba(139,92,246,0.08) 0%, transparent 50%);
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(var(--border) 1px, transparent 1px),
+                        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 80%);
+      opacity: 0.4;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 var(--space-xl);
+      padding-bottom: var(--space-4xl);
+    }
+
+    .hero-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: 0.35rem 0.9rem;
+      border-radius: var(--radius-full);
+      background: var(--accent-glow);
+      border: 1px solid rgba(59,130,246,0.25);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.03em;
+      margin-bottom: var(--space-lg);
+    }
+
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 9vw, 8rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+      margin-bottom: var(--space-md);
+    }
+
+    .hero-name .line { display: block; overflow: hidden; }
+    .hero-name .line-inner { display: block; }
+
+    .hero-role-wrap {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      margin-bottom: var(--space-xl);
+      min-height: 2.5rem;
+    }
+
+    .hero-role-label {
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+
+    .hero-role-text {
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: -0.02em;
+    }
+
+    .hero-role-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.3em;
+      background: var(--accent);
+      margin-left: 2px;
+      vertical-align: middle;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+
+    .hero-bio {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      color: var(--text-secondary);
+      max-width: 560px;
+      line-height: 1.75;
+      margin-bottom: var(--space-2xl);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      margin-bottom: var(--space-3xl);
+    }
+
+    .hero-scroll {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+    }
+
+    .scroll-line {
+      width: 40px;
+      height: 1px;
+      background: var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scroll-line::after {
+      content: '';
+      position: absolute;
+      left: -100%;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--accent);
+      animation: slide-right 2s ease-in-out infinite;
+    }
+
+    @keyframes slide-right { 0% { left:-100%; } 100% { left:100%; } }
+
+    /* ── About preview ─────────────────────────────────────── */
+    .about-preview { background: var(--bg-secondary); }
+
+    .about-preview-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4xl);
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .about-preview-inner { grid-template-columns: 1fr; }
+    }
+
+    .about-portrait {
+      position: relative;
+      aspect-ratio: 3/4;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      max-width: 380px;
+      background: var(--bg-card);
+      border: 1px solid var(--glass-border);
+    }
+
+    .about-portrait-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-md);
+      color: var(--text-secondary);
+    }
+
+    .about-portrait-initial {
+      font-family: var(--font-display);
+      font-size: 5rem;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      background: linear-gradient(135deg, var(--accent), #8B5CF6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .about-portrait-frame {
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      width: 120px;
+      height: 120px;
+      border: 2px solid var(--accent);
+      border-radius: var(--radius-lg);
+      opacity: 0.3;
+    }
+
+    /* ── Skills ─────────────────────────────────────────────── */
+    .skills-section { background: var(--bg-primary); }
+
+    .skills-icons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      margin-top: var(--space-2xl);
+    }
+
+    .skill-icon-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-xs);
+      padding: var(--space-md);
+      min-width: 80px;
+      background: var(--bg-card);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-md);
+      cursor: default;
+      transition: all var(--duration-base) var(--ease-smooth);
+      backdrop-filter: blur(8px);
+    }
+
+    .skill-icon-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .skill-icon-card .icon { font-size: 1.8rem; line-height: 1; }
+    .skill-icon-card .name { font-size: 0.7rem; color: var(--text-secondary); font-weight: 500; text-align: center; }
+
+    /* ── Featured projects ──────────────────────────────────── */
+    .projects-section { background: var(--bg-secondary); }
+
+    /* ── Experience preview ─────────────────────────────────── */
+    .experience-section { background: var(--bg-primary); }
+
+    .exp-card {
+      background: var(--bg-card);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-2xl);
+      backdrop-filter: blur(12px);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: var(--space-xl);
+      align-items: start;
+      max-width: 760px;
+      transition: all var(--duration-base) var(--ease-smooth);
+    }
+
+    .exp-card:hover {
+      border-color: var(--border-hover);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .exp-logo {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-md);
+      background: var(--accent-glow);
+      border: 1px solid rgba(59,130,246,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .exp-title  { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
+    .exp-org    { color: var(--accent); font-weight: 600; font-size: 0.9rem; }
+    .exp-date   { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-secondary); margin-top: 4px; }
+    .exp-desc   { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.7; margin-top: var(--space-sm); }
+
+    /* ── Certifications preview ─────────────────────────────── */
+    .certs-section { background: var(--bg-secondary); }
+
+    /* ── Contact CTA ─────────────────────────────────────────── */
+    .contact-cta {
+      background: var(--bg-primary);
+      text-align: center;
+    }
+
+    .cta-card {
+      background: linear-gradient(135deg, var(--bg-card), var(--bg-secondary));
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-4xl) var(--space-2xl);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+    }
+
+    .cta-card::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, var(--accent-glow), transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-title {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: var(--space-md);
+    }
+
+    .cta-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      max-width: 480px;
+      margin: 0 auto var(--space-2xl);
+      line-height: 1.7;
+    }
+
+    .cta-actions {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 640px) {
+      .hero-name { font-size: clamp(2.8rem, 12vw, 5rem); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading -->
+  <div id="loading-screen" aria-live="polite" aria-label="Loading portfolio">
+    <div class="loading-logo">AI<span>.</span>dev</div>
+    <div class="loading-text">INITIALISING PORTFOLIO...</div>
+    <div class="loading-bar-wrap"><div class="loading-bar"></div></div>
+    <div class="loading-percent">0%</div>
+  </div>
+
+  <!-- Navbar -->
+  <header id="navbar" role="banner"></header>
+
+  <main id="main-content">
+
+    <!-- ── HERO ───────────────────────────────────────────────── -->
+    <section class="hero" aria-label="Introduction">
+      <div class="hero-bg">
+        <div class="hero-gradient"></div>
+        <div class="hero-grid"></div>
+        <canvas id="three-canvas" aria-hidden="true"></canvas>
+      </div>
+
+      <div class="hero-content">
+        <div class="hero-chip hero-reveal">
+          <span class="status-dot"></span>
+          Open to apprenticeship opportunities
+        </div>
+
+        <h1 class="hero-name" aria-label="Ahmad Idrees Yousofzai">
+          <span class="line hero-reveal"><span class="line-inner">Ahmad</span></span>
+          <span class="line hero-reveal" style="color:var(--accent)"><span class="line-inner">Idrees</span></span>
+          <span class="line hero-reveal"><span class="line-inner">Yousofzai</span></span>
+        </h1>
+
+        <div class="hero-role-wrap hero-reveal">
+          <span class="hero-role-label">I'm a</span>
+          <span class="hero-role-text">
+            <span id="role-rotator"></span><span class="hero-role-cursor" aria-hidden="true"></span>
+          </span>
+        </div>
+
+        <p class="hero-bio hero-reveal">
+          T-Level Software Development student at City of Preston College, currently on work placement at Shout Connect.
+          I build thoughtful digital products — from intelligent web apps to AI-powered tools.
+        </p>
+
+        <div class="hero-actions hero-reveal">
+          <a href="projects.html" class="btn btn-primary" data-magnetic>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            View Projects
+          </a>
+          <a href="assets/documents/ahmad-idrees-cv.pdf" download class="btn btn-outline" data-magnetic>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download CV
+          </a>
+          <a href="contact.html" class="btn btn-outline" data-magnetic>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Contact Me
+          </a>
+        </div>
+
+        <div class="hero-scroll hero-reveal" aria-hidden="true">
+          <div class="scroll-line"></div>
+          <span>Scroll to explore</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── ABOUT PREVIEW ──────────────────────────────────────── -->
+    <section class="section about-preview" id="about-preview" aria-labelledby="about-heading">
+      <div class="container about-preview-inner">
+        <div class="about-portrait reveal reveal-left">
+          <div class="about-portrait-placeholder">
+            <div class="about-portrait-initial">AIY</div>
+            <p class="text-sm" style="opacity:0.5">Portrait coming soon</p>
+          </div>
+          <div class="about-portrait-frame" aria-hidden="true"></div>
+        </div>
+        <div>
+          <div class="section-label reveal">About Me</div>
+          <h2 class="section-title reveal" id="about-heading" data-delay="80">
+            Turning ideas into<br><span style="color:var(--accent)">elegant solutions</span>
+          </h2>
+          <p class="section-subtitle reveal" data-delay="160" style="margin-bottom:var(--space-lg)">
+            I'm a passionate software development student based in Preston, UK. My T-Level placement at Shout Connect has given me real industry experience — building web portals, working with databases, and integrating AI into real products.
+          </p>
+          <p style="color:var(--text-secondary);font-size:0.95rem;line-height:1.75;max-width:520px;" class="reveal" data-delay="200">
+            When I'm not coding, I'm exploring new technologies, reading about AI ethics, and working on personal projects that solve real problems. I believe great software starts with empathy — understanding the people you're building for.
+          </p>
+          <div class="stats-row reveal" data-delay="260" style="margin-top:var(--space-2xl)">
+            <div class="stat-item">
+              <div class="stat-number"><span data-count="12" data-suffix="+">0+</span></div>
+              <div class="stat-label">Projects built</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number"><span data-count="8" data-suffix="+">0+</span></div>
+              <div class="stat-label">Certifications</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number"><span data-count="6" data-suffix="mo">0mo</span></div>
+              <div class="stat-label">Industry experience</div>
+            </div>
+          </div>
+          <div style="margin-top:var(--space-xl)" class="reveal" data-delay="320">
+            <a href="about.html" class="btn btn-outline">Read My Story →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SKILLS ─────────────────────────────────────────────── -->
+    <section class="section skills-section" aria-labelledby="skills-heading">
+      <div class="container">
+        <div class="section-label reveal">Technical Skills</div>
+        <h2 class="section-title reveal" id="skills-heading" data-delay="80">Tools I work with</h2>
+        <div class="skills-icons" id="skills-icons-grid" aria-label="Skills list"></div>
+      </div>
+    </section>
+
+    <!-- ── FEATURED PROJECTS ──────────────────────────────────── -->
+    <section class="section projects-section" aria-labelledby="projects-heading">
+      <div class="container">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:var(--space-lg);margin-bottom:var(--space-2xl)">
+          <div>
+            <div class="section-label reveal">Featured Work</div>
+            <h2 class="section-title reveal" id="projects-heading" data-delay="80" style="margin-bottom:0">Selected Projects</h2>
+          </div>
+          <a href="projects.html" class="btn btn-ghost reveal" data-delay="120">View all projects →</a>
+        </div>
+        <div class="grid-3" id="featured-projects-grid" aria-label="Featured projects"></div>
+      </div>
+    </section>
+
+    <!-- ── EXPERIENCE PREVIEW ─────────────────────────────────── -->
+    <section class="section experience-section" aria-labelledby="exp-heading">
+      <div class="container">
+        <div class="section-label reveal">Experience</div>
+        <h2 class="section-title reveal" id="exp-heading" data-delay="80">Where I've worked</h2>
+        <div class="exp-card reveal" data-delay="160" data-tilt>
+          <div class="exp-logo">🏢</div>
+          <div class="exp-content">
+            <div class="exp-title">Software Developer — Work Placement</div>
+            <div class="exp-org">Shout Connect</div>
+            <div class="exp-date">January 2026 – Present · Preston, UK</div>
+            <p class="exp-desc">
+              Contributing to live web development projects in a professional environment. Working with HTML, CSS, JavaScript and back-end technologies to build and maintain service portals. Integrating database solutions and exploring AI-powered features for improved user experience.
+            </p>
+            <div style="display:flex;flex-wrap:wrap;gap:var(--space-xs);margin-top:var(--space-md)">
+              <span class="tag">Web Development</span>
+              <span class="tag">Database Integration</span>
+              <span class="tag">AI Development</span>
+              <span class="tag">Professional Practice</span>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:var(--space-xl)" class="reveal" data-delay="240">
+          <a href="experience.html" class="btn btn-outline">Full Timeline →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CERTS PREVIEW ──────────────────────────────────────── -->
+    <section class="section certs-section" aria-labelledby="certs-heading">
+      <div class="container">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:var(--space-lg);margin-bottom:var(--space-2xl)">
+          <div>
+            <div class="section-label reveal">Certifications</div>
+            <h2 class="section-title reveal" id="certs-heading" data-delay="80" style="margin-bottom:0">Qualifications & Courses</h2>
+          </div>
+          <a href="certifications.html" class="btn btn-ghost reveal" data-delay="120">View all →</a>
+        </div>
+        <div class="grid-4" id="featured-certs-grid" aria-label="Featured certifications"></div>
+      </div>
+    </section>
+
+    <!-- ── CONTACT CTA ────────────────────────────────────────── -->
+    <section class="section contact-cta" aria-labelledby="cta-heading">
+      <div class="container">
+        <div class="cta-card reveal">
+          <p class="section-label" style="justify-content:center">Let's Connect</p>
+          <h2 class="cta-title" id="cta-heading">
+            Ready to build something<br><span style="color:var(--accent)">remarkable together?</span>
+          </h2>
+          <p class="cta-subtitle">
+            Whether you're a recruiter looking for an apprentice developer, or you just want to say hello — my inbox is always open.
+          </p>
+          <div class="cta-actions">
+            <a href="contact.html" class="btn btn-primary" data-magnetic>
+              Get in Touch
+            </a>
+            <a href="https://linkedin.com/in/ahmadidrees" target="_blank" rel="noopener" class="btn btn-outline" data-magnetic>
+              Connect on LinkedIn
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer role="contentinfo"></footer>
+
+  <script type="module">
+    import { initTheme, initCursor, initScrollProgress, initNavbar, initBackToTop, initLoading, initReveal, initSkillBars, fetchData } from './assets/js/main.js';
+    import { injectLayout } from './assets/js/layout.js';
+    import { initCommandPalette } from './assets/js/command-palette.js';
+    import { initRoleRotator, initTilt, initParallax, initHeroReveal, initMagneticButtons, initCounters } from './assets/js/animations.js';
+    import { initThreeScene } from './assets/js/three-scene.js';
+
+    // Inject shared layout
+    injectLayout();
+
+    // Core
+    initTheme();
+    initNavbar();
+    initScrollProgress();
+    initBackToTop();
+    initCommandPalette();
+    initCursor();
+
+    // Loading screen → then init everything
+    initLoading(() => {
+      initHeroReveal();
+      initRoleRotator();
+      initReveal();
+      initTilt();
+      initParallax();
+      initMagneticButtons();
+      initCounters();
+      initSkillBars();
+      initThreeScene();
+      loadDynamicContent();
+    });
+
+    async function loadDynamicContent() {
+      await Promise.all([
+        loadFeaturedProjects(),
+        loadFeaturedCerts(),
+        loadSkillsIcons(),
+      ]);
+    }
+
+    const SKILLS = [
+      { icon: '🌐', name: 'HTML5' },
+      { icon: '🎨', name: 'CSS3' },
+      { icon: '⚡', name: 'JavaScript' },
+      { icon: '🐍', name: 'Python' },
+      { icon: '⚛️', name: 'React' },
+      { icon: '🗄️', name: 'SQL' },
+      { icon: '🐙', name: 'Git' },
+      { icon: '🤖', name: 'AI / ML' },
+      { icon: '🅿️', name: 'PHP' },
+      { icon: '🐘', name: 'PostgreSQL' },
+      { icon: '🔵', name: 'MySQL' },
+      { icon: '📦', name: 'Node.js' },
+      { icon: '🎯', name: 'Figma' },
+      { icon: '🖥️', name: 'VS Code' },
+    ];
+
+    function loadSkillsIcons() {
+      const grid = document.getElementById('skills-icons-grid');
+      if (!grid) return;
+      grid.innerHTML = SKILLS.map((s, i) => `
+        <div class="skill-icon-card reveal" data-delay="${i * 50}" aria-label="${s.name}">
+          <span class="icon" aria-hidden="true">${s.icon}</span>
+          <span class="name">${s.name}</span>
+        </div>
+      `).join('');
+      initReveal();
+    }
+
+    async function loadFeaturedProjects() {
+      const grid     = document.getElementById('featured-projects-grid');
+      if (!grid) return;
+      const projects = await fetchData('assets/data/projects.json');
+      if (!projects) return;
+      const featured = projects.filter(p => p.featured).slice(0, 6);
+      grid.innerHTML = featured.map((p, i) => projectCard(p, i * 80)).join('');
+      initReveal();
+      initTilt();
+    }
+
+    async function loadFeaturedCerts() {
+      const grid  = document.getElementById('featured-certs-grid');
+      if (!grid) return;
+      const certs = await fetchData('assets/data/certifications.json');
+      if (!certs) return;
+      const featured = certs.filter(c => c.featured).slice(0, 4);
+      grid.innerHTML = featured.map((c, i) => certCard(c, i * 80)).join('');
+      initReveal();
+    }
+
+    function projectCard(p, delay = 0) {
+      const statusBadge = p.status === 'completed'
+        ? '<span class="badge badge-completed">● Completed</span>'
+        : '<span class="badge badge-progress">● In Progress</span>';
+
+      return `
+        <article class="project-card reveal" data-delay="${delay}" data-tilt aria-label="${p.title}">
+          <div class="project-thumb">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <rect x="4" y="8" width="40" height="32" rx="4"/><path d="M4 16h40"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><circle cx="18" cy="12" r="1.5" fill="currentColor"/><circle cx="24" cy="12" r="1.5" fill="currentColor"/>
+            </svg>
+            <div class="project-thumb-overlay">
+              ${p.demo ? `<a href="${p.demo}" target="_blank" rel="noopener" class="btn btn-primary" style="padding:.4rem 1rem;font-size:.75rem">Live Demo</a>` : ''}
+              <a href="${p.github}" target="_blank" rel="noopener" class="btn btn-outline" style="padding:.4rem 1rem;font-size:.75rem;color:#fff">GitHub</a>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-top">
+              <h3 class="project-title">${p.title}</h3>
+              ${p.featured ? '<span class="badge badge-featured">⭐ Featured</span>' : ''}
+            </div>
+            <p class="project-desc">${p.description}</p>
+            <div class="project-tags">
+              ${p.tags.slice(0, 4).map(t => `<span class="tag">${t}</span>`).join('')}
+            </div>
+          </div>
+          <div class="project-footer">
+            ${statusBadge}
+            <div class="project-links">
+              <a href="${p.github}" target="_blank" rel="noopener" class="project-link" aria-label="View on GitHub">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                GitHub
+              </a>
+              ${p.demo ? `<a href="${p.demo}" target="_blank" rel="noopener" class="project-link" aria-label="View live demo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Demo
+              </a>` : ''}
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function certCard(c, delay = 0) {
+      return `
+        <div class="cert-card reveal" data-delay="${delay}" aria-label="${c.title}">
+          <div class="cert-icon" aria-hidden="true">${c.icon}</div>
+          <div class="cert-title">${c.title}</div>
+          <div class="cert-issuer">${c.issuer}</div>
+          <div class="cert-date">${c.date}</div>
+          <div class="cert-skills">
+            ${c.skills.slice(0, 3).map(s => `<span class="tag">${s}</span>`).join('')}
+          </div>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>

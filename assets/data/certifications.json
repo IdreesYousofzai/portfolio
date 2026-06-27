@@ -1,0 +1,90 @@
+[
+  {
+    "id": 1,
+    "title": "T-Level Technical Qualification in Digital Production, Design and Development",
+    "issuer": "NCFE / City of Preston College",
+    "date": "2025",
+    "category": "Education",
+    "description": "National T-Level qualification in software development, covering full-stack development, database systems, software testing, and project management.",
+    "skills": ["Software Development", "Database Design", "Project Management", "Testing"],
+    "icon": "🎓",
+    "featured": true
+  },
+  {
+    "id": 2,
+    "title": "Responsive Web Design",
+    "issuer": "freeCodeCamp",
+    "date": "2024",
+    "category": "Web Development",
+    "description": "Comprehensive certification covering HTML5, CSS3, Flexbox, CSS Grid, and responsive design principles.",
+    "skills": ["HTML5", "CSS3", "Flexbox", "CSS Grid", "Responsive Design"],
+    "icon": "🌐",
+    "featured": true
+  },
+  {
+    "id": 3,
+    "title": "JavaScript Algorithms and Data Structures",
+    "issuer": "freeCodeCamp",
+    "date": "2024",
+    "category": "Programming",
+    "description": "In-depth certification covering JavaScript fundamentals, ES6+, algorithms, and data structures.",
+    "skills": ["JavaScript", "ES6+", "Algorithms", "Data Structures", "OOP"],
+    "icon": "⚡",
+    "featured": true
+  },
+  {
+    "id": 4,
+    "title": "Python for Everybody",
+    "issuer": "Coursera / University of Michigan",
+    "date": "2024",
+    "category": "Programming",
+    "description": "Python programming course covering variables, conditionals, loops, functions, and data structures.",
+    "skills": ["Python", "Data Structures", "File I/O", "Web Scraping"],
+    "icon": "🐍",
+    "featured": true
+  },
+  {
+    "id": 5,
+    "title": "Introduction to SQL",
+    "issuer": "Khan Academy",
+    "date": "2024",
+    "category": "Database",
+    "description": "Foundational SQL certification covering queries, joins, aggregations, and database design principles.",
+    "skills": ["SQL", "Database Design", "Joins", "Aggregations"],
+    "icon": "🗄️",
+    "featured": false
+  },
+  {
+    "id": 6,
+    "title": "Git & GitHub Complete Guide",
+    "issuer": "Udemy",
+    "date": "2024",
+    "category": "Tools",
+    "description": "Comprehensive guide to version control with Git and GitHub, including branching strategies and collaboration workflows.",
+    "skills": ["Git", "GitHub", "Version Control", "Collaboration"],
+    "icon": "🔧",
+    "featured": false
+  },
+  {
+    "id": 7,
+    "title": "Introduction to AI and Machine Learning",
+    "issuer": "Google Digital Garage",
+    "date": "2025",
+    "category": "AI",
+    "description": "Foundational concepts in artificial intelligence, machine learning algorithms, and practical AI applications.",
+    "skills": ["AI Fundamentals", "Machine Learning", "Neural Networks", "AI Ethics"],
+    "icon": "🤖",
+    "featured": false
+  },
+  {
+    "id": 8,
+    "title": "Front-End Development Libraries",
+    "issuer": "freeCodeCamp",
+    "date": "2025",
+    "category": "Web Development",
+    "description": "Certification covering React, Redux, Bootstrap, jQuery, and Sass.",
+    "skills": ["React", "Redux", "Bootstrap", "Sass"],
+    "icon": "⚛️",
+    "featured": false
+  }
+]

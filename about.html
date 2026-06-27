@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="About Ahmad Idrees Yousofzai — T-Level student, developer, and aspiring software engineer based in Preston, UK."/>
+  <title>About — Ahmad Idrees</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/css/main.css"/>
+  <link rel="stylesheet" href="assets/css/components.css"/>
+  <style>
+    .hero-gradient-about {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 30% 50%, rgba(139,92,246,0.12), transparent 60%),
+                  radial-gradient(ellipse 50% 40% at 80% 30%, rgba(59,130,246,0.08), transparent 50%);
+      pointer-events: none;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: var(--space-4xl);
+      align-items: start;
+    }
+
+    @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; } }
+
+    .sidebar-card {
+      background: var(--bg-card);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-xl);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: calc(var(--nav-height) + var(--space-xl));
+    }
+
+    .sidebar-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: var(--radius-lg);
+      background: var(--accent-glow);
+      border: 1px solid rgba(59,130,246,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #1E3A8A, #4C1D95);
+      color: #fff;
+      margin-bottom: var(--space-md);
+    }
+
+    .sidebar-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+
+    .sidebar-role {
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: var(--space-lg);
+    }
+
+    .sidebar-info-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-bottom: var(--space-sm);
+    }
+
+    .sidebar-info-item span:first-child { width: 16px; text-align: center; }
+
+    .sidebar-divider { border: none; border-top: 1px solid var(--border); margin: var(--space-lg) 0; }
+
+    .sidebar-socials { display: flex; gap: var(--space-sm); }
+
+    .about-content h2 {
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: var(--space-md);
+    }
+
+    .about-content p {
+      color: var(--text-secondary);
+      line-height: 1.8;
+      font-size: 0.975rem;
+      margin-bottom: var(--space-lg);
+    }
+
+    .about-content p strong { color: var(--text-primary); font-weight: 600; }
+
+    .interests-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-md);
+      margin-top: var(--space-lg);
+    }
+
+    @media (max-width: 480px) { .interests-grid { grid-template-columns: 1fr; } }
+
+    .interest-card {
+      background: var(--bg-card);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      backdrop-filter: blur(8px);
+      transition: border-color var(--duration-base);
+    }
+
+    .interest-card:hover { border-color: var(--border-hover); }
+    .interest-icon { font-size: 1.4rem; margin-bottom: var(--space-xs); }
+    .interest-title { font-size: 0.875rem; font-weight: 600; }
+    .interest-desc  { font-size: 0.75rem; color: var(--text-secondary); margin-top: 2px; }
+
+    .edu-card {
+      background: var(--bg-card);
+      border: 1px solid var(--glass-border);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      backdrop-filter: blur(8px);
+      margin-bottom: var(--space-lg);
+    }
+
+    .edu-institution { font-size: 1rem; font-weight: 700; }
+    .edu-qual        { color: var(--accent); font-size: 0.85rem; font-weight: 600; margin-top: 4px; }
+    .edu-dates       { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-secondary); margin-top: 4px; }
+    .edu-desc        { color: var(--text-secondary); font-size: 0.85rem; line-height: 1.7; margin-top: var(--space-sm); }
+
+    .skills-full-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-lg);
+    }
+
+    @media (max-width: 768px) { .skills-full-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .skills-full-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <header id="navbar" role="banner"></header>
+
+  <main id="main-content">
+
+    <!-- Hero -->
+    <section class="page-hero" style="background:var(--bg-secondary)">
+      <div class="hero-gradient-about page-hero-bg"></div>
+      <div class="container page-hero-content">
+        <div class="section-label hero-reveal">About Me</div>
+        <h1 class="text-headline hero-reveal" style="max-width:700px;margin-bottom:var(--space-lg)" data-delay="80">
+          Developer. Learner.<br><span style="color:var(--accent)">Problem Solver.</span>
+        </h1>
+        <p style="color:var(--text-secondary);font-size:1.1rem;max-width:580px;line-height:1.75" class="hero-reveal" data-delay="160">
+          A little about who I am, what I've studied, and what drives me to keep building.
+        </p>
+      </div>
+    </section>
+
+    <!-- Main about content -->
+    <section class="section" style="background:var(--bg-primary)">
+      <div class="container about-grid">
+
+        <!-- Sidebar -->
+        <div class="sidebar-card reveal reveal-left">
+          <div class="sidebar-avatar">AIY</div>
+          <div class="sidebar-name">Ahmad Idrees Yousofzai</div>
+          <div class="sidebar-role">T-Level Software Developer</div>
+
+          <div class="sidebar-info-item">
+            <span>📍</span><span>Preston, Lancashire, UK</span>
+          </div>
+          <div class="sidebar-info-item">
+            <span>🎓</span><span>City of Preston College</span>
+          </div>
+          <div class="sidebar-info-item">
+            <span>💼</span><span>Shout Connect (Placement)</span>
+          </div>
+          <div class="sidebar-info-item">
+            <span>🔍</span><span>Seeking Apprenticeship</span>
+          </div>
+          <div class="sidebar-info-item">
+            <span>📧</span><span>ahmad@example.com</span>
+          </div>
+
+          <hr class="sidebar-divider"/>
+          <p style="font-size:0.75rem;color:var(--text-secondary);margin-bottom:var(--space-md)">Connect with me</p>
+          <div class="sidebar-socials">
+            <a href="https://github.com/ahmadidrees" target="_blank" rel="noopener" class="social-link" aria-label="GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            </a>
+            <a href="https://linkedin.com/in/ahmadidrees" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a href="mailto:ahmad@example.com" class="social-link" aria-label="Email">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </a>
+          </div>
+
+          <hr class="sidebar-divider"/>
+          <a href="assets/documents/ahmad-idrees-cv.pdf" download class="btn btn-primary" style="width:100%;justify-content:center;margin-top:0">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download CV
+          </a>
+        </div>
+
+        <!-- Main content -->
+        <div class="about-content">
+
+          <!-- Personal intro -->
+          <div class="reveal">
+            <div class="section-label">Introduction</div>
+            <h2>Hi, I'm Ahmad 👋</h2>
+            <p>
+              I'm a software development student at <strong>City of Preston College</strong>, currently completing my T-Level qualification in Digital Production, Design and Development. My journey into tech started with curiosity — I wanted to understand how the things I used every day actually worked. That curiosity became a passion, and that passion became a craft.
+            </p>
+            <p>
+              I'm currently on a professional work placement at <strong>Shout Connect</strong>, where I'm contributing to real-world web development projects, working with databases, and exploring how AI can enhance everyday software. It's been an incredible experience to take what I've learned in the classroom and apply it in a live environment.
+            </p>
+          </div>
+
+          <!-- Education -->
+          <div class="reveal" style="margin-top:var(--space-3xl)" data-delay="80">
+            <div class="section-label">Education</div>
+            <h2>Academic Journey</h2>
+
+            <div class="edu-card">
+              <div class="edu-institution">City of Preston College</div>
+              <div class="edu-qual">T-Level — Digital Production, Design and Development</div>
+              <div class="edu-dates">2024 – 2026</div>
+              <p class="edu-desc">
+                A 2-year technical qualification equivalent to 3 A-Levels. Covering software development, database design, UX/UI principles, networking fundamentals, and professional project management. Includes a 315-hour industry placement, giving me genuine workplace experience alongside my studies.
+              </p>
+              <div style="display:flex;flex-wrap:wrap;gap:var(--space-xs);margin-top:var(--space-md)">
+                <span class="tag">Software Development</span>
+                <span class="tag">Database Design</span>
+                <span class="tag">UX/UI</span>
+                <span class="tag">Project Management</span>
+                <span class="tag">Networking</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- T-Level deep dive -->
+          <div class="reveal" data-delay="120">
+            <div class="section-label">T-Level Studies</div>
+            <h2>What a T-Level Actually Means</h2>
+            <p>
+              T-Levels are a rigorous technical qualification designed in collaboration with industry. Unlike traditional A-Levels, they combine <strong>classroom learning with real industry placement</strong>, making them uniquely suited to someone who wants to enter the tech industry directly.
+            </p>
+            <p>
+              My course has given me a broad foundation — from understanding <strong>object-oriented programming</strong> in Python and JavaScript, to designing and normalising relational databases, to applying <strong>agile methodologies</strong> in team projects. The industry placement requirement means I've had to perform professionally, not just academically.
+            </p>
+          </div>
+
+          <!-- Career aspirations -->
+          <div class="reveal" data-delay="160">
+            <div class="section-label">Career Goals</div>
+            <h2>Where I'm Heading</h2>
+            <p>
+              I'm actively seeking a <strong>Software Development Apprenticeship</strong> where I can continue growing while contributing real value to a team. My goal is to join a company that cares about code quality, mentorship, and building products that genuinely help people.
+            </p>
+            <p>
+              Long-term, I'm drawn to the intersection of <strong>software engineering and artificial intelligence</strong>. I believe the next decade of software will be defined by how intelligently it can adapt to its users, and I want to be part of building that.
+            </p>
+          </div>
+
+          <!-- Skills -->
+          <div class="reveal" style="margin-top:var(--space-3xl)" data-delay="100">
+            <div class="section-label">Technical Skills</div>
+            <h2>Things I'm Good At</h2>
+            <div class="skills-full-grid">
+              <div class="skills-category">
+                <div class="skills-category-title">Frontend</div>
+                <div class="skill-item">
+                  <div class="skill-header"><span class="skill-name">HTML5 & CSS3</span><span class="skill-level">90%</span></div>
+                  <div class="skill-bar-wrap"><div class="skill-bar" data-level="90"></div></div>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-header"><span class="skill-name">JavaScript</span><span class="skill-level">75%</span></div>
+                  <div class="skill-bar-wrap"><div class="skill-bar" data-level="75"></div></div>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-header"><span class="skill-name">React</span><span class="skill-level">55%</span></div>
+                  <div class="skill-bar-wrap"><div class="skill-bar" data-level="55"></div></div>
+                </div>
+              </div>
+              <div class="skills-category">
+                <div class="skills-category-title">Backend & Languages</div>
+                <div class="skill-item">
+                  <div class="skill-header"><span class="skill-name">Python</span><span class="skill-level">80%</span></div>
+                  <div class="skill-bar-wrap"><div class="skill-bar" data-level="80"></div></div>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-header"><span class="skill-name">PHP</span><span class="skill-level">60%</span></div>
+                  <div class="skill-bar-wrap"><div class="skill-bar" data-level="60"></div></div>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-header"><span class="skill-name">Node.js</span><span class="skill-level">45%</span></div>
+                  <div class="skill-bar-wrap"><div class="skill-bar" data-level="45"></div></div>
+                </div>
+              </div>
+              <div class="skills-category">
+                <div class="skills-category-title">Databases & Tools</div>
+                <div class="skill-item">
+                  <div class="skill-header"><span class="skill-name">SQL / MySQL</span><span class="skill-level">75%</span></div>
+                  <div class="skill-bar-wrap"><div class="skill-bar" data-level="75"></div></div>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-header"><span class="skill-name">PostgreSQL</span><span class="skill-level">65%</span></div>
+                  <div class="skill-bar-wrap"><div class="skill-bar" data-level="65"></div></div>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-header"><span class="skill-name">Git & GitHub</span><span class="skill-level">80%</span></div>
+                  <div class="skill-bar-wrap"><div class="skill-bar" data-level="80"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interests -->
+          <div class="reveal" style="margin-top:var(--space-3xl)" data-delay="120">
+            <div class="section-label">Beyond Code</div>
+            <h2>Personal Interests</h2>
+            <p>A developer is more than just their stack. Here's what keeps me curious outside of work.</p>
+            <div class="interests-grid">
+              <div class="interest-card">
+                <div class="interest-icon">🤖</div>
+                <div class="interest-title">Artificial Intelligence</div>
+                <div class="interest-desc">Following AI research, experimenting with models, thinking about ethics.</div>
+              </div>
+              <div class="interest-card">
+                <div class="interest-icon">📚</div>
+                <div class="interest-title">Reading</div>
+                <div class="interest-desc">Tech, philosophy, psychology — anything that expands how I think.</div>
+              </div>
+              <div class="interest-card">
+                <div class="interest-icon">🎮</div>
+                <div class="interest-title">Gaming</div>
+                <div class="interest-desc">A long-standing love for games and the design thinking behind them.</div>
+              </div>
+              <div class="interest-card">
+                <div class="interest-icon">🌍</div>
+                <div class="interest-title">Open Source</div>
+                <div class="interest-desc">Exploring projects, learning from codebases, and giving back.</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer role="contentinfo"></footer>
+
+  <script type="module">
+    import { initTheme, initCursor, initScrollProgress, initNavbar, initBackToTop, initReveal, initSkillBars } from './assets/js/main.js';
+    import { injectLayout } from './assets/js/layout.js';
+    import { initCommandPalette } from './assets/js/command-palette.js';
+    import { initHeroReveal, initTilt, initMagneticButtons } from './assets/js/animations.js';
+
+    injectLayout();
+    initTheme();
+    initNavbar();
+    initScrollProgress();
+    initBackToTop();
+    initCommandPalette();
+    initCursor();
+    initHeroReveal();
+    initReveal();
+    initSkillBars();
+    initTilt();
+    initMagneticButtons();
+  </script>
+</body>
+</html>

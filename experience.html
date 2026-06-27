@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Experience — Ahmad Idrees Yousofzai's work placement and professional development timeline."/>
+  <title>Experience — Ahmad Idrees</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/css/main.css"/>
+  <link rel="stylesheet" href="assets/css/components.css"/>
+  <style>
+    .exp-layout {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: var(--space-4xl);
+      align-items: start;
+    }
+
+    @media (max-width: 900px) { .exp-layout { grid-template-columns: 1fr; } }
+
+    .exp-sidebar {
+      position: sticky;
+      top: calc(var(--nav-height) + var(--space-xl));
+    }
+
+    .exp-summary-card {
+      background: var(--bg-card);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-xl);
+      backdrop-filter: blur(12px);
+      margin-bottom: var(--space-lg);
+    }
+
+    .exp-summary-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: var(--space-sm);
+    }
+
+    .exp-summary-value {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+    }
+
+    .exp-summary-value span { color: var(--accent); }
+
+    .skill-developed {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: var(--space-sm) var(--space-md);
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-md);
+      font-size: 0.82rem;
+      font-weight: 500;
+      margin-bottom: var(--space-sm);
+      transition: border-color var(--duration-fast);
+      cursor: default;
+    }
+
+    .skill-developed:hover { border-color: var(--border-hover); }
+    .skill-developed-icon  { font-size: 1rem; }
+
+    /* Big timeline for experience */
+    .exp-timeline {
+      position: relative;
+      padding-left: 56px;
+    }
+
+    .exp-timeline::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent), var(--border));
+    }
+
+    .exp-timeline-item {
+      position: relative;
+      margin-bottom: var(--space-3xl);
+    }
+
+    .exp-timeline-dot {
+      position: absolute;
+      left: -43px;
+      top: 8px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 3px solid var(--bg-primary);
+      box-shadow: 0 0 20px var(--accent-glow);
+      z-index: 1;
+    }
+
+    .exp-timeline-dot.current {
+      animation: pulse-glow 2.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 10px var(--accent-glow); }
+      50%       { box-shadow: 0 0 25px rgba(59,130,246,0.5); }
+    }
+
+    .exp-item-card {
+      background: var(--bg-card);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-xl);
+      backdrop-filter: blur(12px);
+      transition: all var(--duration-base) var(--ease-smooth);
+    }
+
+    .exp-item-card:hover {
+      border-color: var(--border-hover);
+      box-shadow: var(--shadow-glow), var(--shadow-md);
+    }
+
+    .exp-item-header {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-md);
+      margin-bottom: var(--space-md);
+    }
+
+    .exp-item-logo {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-md);
+      background: var(--accent-glow);
+      border: 1px solid rgba(59,130,246,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .exp-item-meta {}
+    .exp-item-role { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.01em; }
+    .exp-item-company { color: var(--accent); font-weight: 600; font-size: 0.9rem; margin-top: 2px; }
+    .exp-item-date-location {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    .exp-item-body { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.8; }
+
+    .exp-item-highlights {
+      margin-top: var(--space-lg);
+      list-style: none;
+    }
+
+    .exp-item-highlights li {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-sm);
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      margin-bottom: var(--space-sm);
+      line-height: 1.6;
+    }
+
+    .exp-item-highlights li::before {
+      content: '→';
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .exp-item-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      margin-top: var(--space-lg);
+      padding-top: var(--space-md);
+      border-top: 1px solid var(--glass-border);
+    }
+
+    .current-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0.25rem 0.7rem;
+      border-radius: var(--radius-full);
+      background: rgba(16,185,129,0.12);
+      border: 1px solid rgba(16,185,129,0.3);
+      color: #10B981;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+  <header id="navbar" role="banner"></header>
+
+  <main id="main-content">
+
+    <!-- Hero -->
+    <section class="page-hero" style="background:var(--bg-secondary)">
+      <div class="page-hero-bg" style="background:radial-gradient(ellipse 60% 60% at 80% 40%, rgba(59,130,246,0.1), transparent 60%)"></div>
+      <div class="container page-hero-content">
+        <div class="section-label hero-reveal">Professional Journey</div>
+        <h1 class="text-headline hero-reveal" data-delay="80">
+          Experience &<br><span style="color:var(--accent)">Placement</span>
+        </h1>
+        <p style="color:var(--text-secondary);font-size:1.05rem;max-width:540px;line-height:1.75;margin-top:var(--space-md)" class="hero-reveal" data-delay="160">
+          From classroom to industry — how my T-Level placement at Shout Connect shaped my professional skills.
+        </p>
+      </div>
+    </section>
+
+    <!-- Content -->
+    <section class="section" style="background:var(--bg-primary)">
+      <div class="container exp-layout">
+
+        <!-- Sidebar -->
+        <aside class="exp-sidebar">
+          <div class="exp-summary-card reveal reveal-left">
+            <div class="exp-summary-label">Total Experience</div>
+            <div class="exp-summary-value"><span data-count="6" data-suffix="+">0+</span> Months</div>
+          </div>
+          <div class="exp-summary-card reveal reveal-left" data-delay="80">
+            <div class="exp-summary-label">Organisations</div>
+            <div class="exp-summary-value"><span>1</span></div>
+          </div>
+          <div class="exp-summary-card reveal reveal-left" data-delay="160">
+            <div class="exp-summary-label">Current Status</div>
+            <div class="current-badge"><span class="status-dot"></span>Active Placement</div>
+          </div>
+
+          <div style="margin-top:var(--space-xl)" class="reveal reveal-left" data-delay="200">
+            <p style="font-family:var(--font-mono);font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-secondary);margin-bottom:var(--space-md)">Skills Developed</p>
+
+            <div class="skill-developed"><span class="skill-developed-icon">🌐</span>Web Development</div>
+            <div class="skill-developed"><span class="skill-developed-icon">🗄️</span>Database Integration</div>
+            <div class="skill-developed"><span class="skill-developed-icon">🤖</span>AI Development</div>
+            <div class="skill-developed"><span class="skill-developed-icon">🤝</span>Professional Practice</div>
+            <div class="skill-developed"><span class="skill-developed-icon">📋</span>Project Management</div>
+            <div class="skill-developed"><span class="skill-developed-icon">🔄</span>Agile Workflow</div>
+            <div class="skill-developed"><span class="skill-developed-icon">💬</span>Client Communication</div>
+            <div class="skill-developed"><span class="skill-developed-icon">🐙</span>Version Control</div>
+          </div>
+        </aside>
+
+        <!-- Timeline -->
+        <div>
+          <div class="section-label reveal" style="margin-bottom:var(--space-2xl)">Work History</div>
+
+          <div class="exp-timeline">
+
+            <!-- Shout Connect -->
+            <div class="exp-timeline-item reveal" data-delay="100">
+              <div class="exp-timeline-dot current" aria-hidden="true"></div>
+              <div class="exp-item-card">
+                <div class="exp-item-header">
+                  <div class="exp-item-logo" aria-hidden="true">🏢</div>
+                  <div class="exp-item-meta">
+                    <div class="exp-item-role">Software Developer — Industry Placement</div>
+                    <div class="exp-item-company">Shout Connect</div>
+                    <div class="exp-item-date-location">
+                      <span>📅 January 2026 – Present</span>
+                      <span>📍 Preston, Lancashire, UK</span>
+                      <span class="current-badge"><span class="status-dot"></span>Current</span>
+                    </div>
+                  </div>
+                </div>
+
+                <p class="exp-item-body">
+                  As part of my T-Level qualification, I completed a 315-hour industry placement at Shout Connect, a technology company based in Preston. Working within a professional development team, I contributed to live projects used by real clients, gaining hands-on experience that no classroom can fully replicate.
+                </p>
+
+                <ul class="exp-item-highlights" aria-label="Key responsibilities and achievements">
+                  <li>Built and maintained responsive web pages and service portals using HTML, CSS, JavaScript and PHP</li>
+                  <li>Designed and integrated database schemas using PostgreSQL, including CRUD operations and query optimisation</li>
+                  <li>Explored AI integration for automating tasks and improving user-facing features using Python and API services</li>
+                  <li>Participated in daily stand-ups and sprint reviews using agile methodology</li>
+                  <li>Collaborated with senior developers on code reviews, learning industry-standard practices and Git workflows</li>
+                  <li>Wrote and maintained technical documentation for features I developed</li>
+                  <li>Communicated directly with stakeholders to gather requirements and report on progress</li>
+                </ul>
+
+                <div class="exp-item-tags">
+                  <span class="tag">HTML5</span>
+                  <span class="tag">CSS3</span>
+                  <span class="tag">JavaScript</span>
+                  <span class="tag">PHP</span>
+                  <span class="tag">PostgreSQL</span>
+                  <span class="tag">Python</span>
+                  <span class="tag">Git</span>
+                  <span class="tag">Agile</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- T-Level studies -->
+            <div class="exp-timeline-item reveal" data-delay="200">
+              <div class="exp-timeline-dot" aria-hidden="true"></div>
+              <div class="exp-item-card">
+                <div class="exp-item-header">
+                  <div class="exp-item-logo" aria-hidden="true">🎓</div>
+                  <div class="exp-item-meta">
+                    <div class="exp-item-role">T-Level Student — Digital Production, Design & Development</div>
+                    <div class="exp-item-company">City of Preston College</div>
+                    <div class="exp-item-date-location">
+                      <span>📅 September 2024 – June 2026</span>
+                      <span>📍 Preston, Lancashire, UK</span>
+                    </div>
+                  </div>
+                </div>
+
+                <p class="exp-item-body">
+                  The T-Level in Digital Production, Design and Development is a two-year post-16 qualification equivalent to three A-Levels. Developed in partnership with employers including Cisco, Microsoft, and BT, it provides both rigorous academic content and substantial industry experience.
+                </p>
+
+                <ul class="exp-item-highlights" aria-label="Key modules and activities">
+                  <li>Studied object-oriented programming, algorithms, and data structures in Python and JavaScript</li>
+                  <li>Completed modules on relational databases, third normal form, and SQL query design</li>
+                  <li>Designed user interfaces using principles from UX research and accessibility standards</li>
+                  <li>Worked in team projects using agile methodology, with roles rotating between developer, project manager, and tester</li>
+                  <li>Completed mandatory 315-hour industry placement at Shout Connect</li>
+                </ul>
+
+                <div class="exp-item-tags">
+                  <span class="tag">Python</span>
+                  <span class="tag">JavaScript</span>
+                  <span class="tag">SQL</span>
+                  <span class="tag">UX/UI</span>
+                  <span class="tag">Networking</span>
+                  <span class="tag">Agile</span>
+                  <span class="tag">Project Management</span>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /.exp-timeline -->
+
+          <!-- CTA -->
+          <div class="reveal" data-delay="300" style="margin-top:var(--space-2xl)">
+            <div class="exp-item-card" style="text-align:center;padding:var(--space-2xl)">
+              <div style="font-size:2rem;margin-bottom:var(--space-md)">🚀</div>
+              <h3 style="font-size:1.1rem;margin-bottom:var(--space-sm)">Looking for my next chapter</h3>
+              <p style="color:var(--text-secondary);font-size:.875rem;max-width:400px;margin:0 auto var(--space-xl)">
+                I'm actively seeking a Software Development Apprenticeship to continue growing in a professional environment.
+              </p>
+              <div style="display:flex;gap:var(--space-md);justify-content:center;flex-wrap:wrap">
+                <a href="contact.html" class="btn btn-primary">Get in Touch</a>
+                <a href="assets/documents/ahmad-idrees-cv.pdf" download class="btn btn-outline">Download CV</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer role="contentinfo"></footer>
+
+  <script type="module">
+    import { initTheme, initCursor, initScrollProgress, initNavbar, initBackToTop, initReveal } from './assets/js/main.js';
+    import { injectLayout } from './assets/js/layout.js';
+    import { initCommandPalette } from './assets/js/command-palette.js';
+    import { initHeroReveal, initMagneticButtons, initCounters } from './assets/js/animations.js';
+
+    injectLayout();
+    initTheme();
+    initNavbar();
+    initScrollProgress();
+    initBackToTop();
+    initCommandPalette();
+    initCursor();
+    initHeroReveal();
+    initReveal();
+    initCounters();
+    initMagneticButtons();
+  </script>
+</body>
+</html>
