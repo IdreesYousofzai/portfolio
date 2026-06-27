@@ -1,0 +1,261 @@
+/* ============================================================
+   themes.css — Design tokens: dark theme, light theme, shared
+   ============================================================ */
+
+/* ── Dark theme (default) ───────────────────────────────────── */
+:root,
+[data-theme="dark"] {
+  /* Backgrounds */
+  --bg-primary:     #0B0F19;
+  --bg-secondary:   #131A29;
+  --bg-card:        rgba(19, 26, 41, 0.7);
+  --bg-overlay:     rgba(0, 0, 0, 0.6);
+
+  /* Text */
+  --text-primary:   #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted:     #64748B;
+
+  /* Accent */
+  --accent:         #3B82F6;
+  --accent-hover:   #60A5FA;
+  --accent-glow:    rgba(59, 130, 246, 0.25);
+  --accent-subtle:  rgba(59, 130, 246, 0.08);
+
+  /* Borders */
+  --border:         rgba(148, 163, 184, 0.10);
+  --border-hover:   rgba(59, 130, 246, 0.40);
+
+  /* Glass */
+  --glass:          rgba(19, 26, 41, 0.60);
+  --glass-border:   rgba(255, 255, 255, 0.06);
+
+  /* Shadows */
+  --shadow-sm:   0 1px 3px rgba(0, 0, 0, 0.30), 0 1px 2px rgba(0, 0, 0, 0.20);
+  --shadow-md:   0 4px 16px rgba(0, 0, 0, 0.40);
+  --shadow-lg:   0 8px 32px rgba(0, 0, 0, 0.50);
+  --shadow-xl:   0 20px 60px rgba(0, 0, 0, 0.60);
+  --shadow-glow: 0 0 30px rgba(59, 130, 246, 0.20);
+
+  /* Gradients */
+  --gradient-hero:   radial-gradient(ellipse 80% 60% at 60% 30%, rgba(59,130,246,0.12), transparent 60%),
+                     radial-gradient(ellipse 60% 40% at 20% 70%, rgba(139,92,246,0.08), transparent 50%);
+  --gradient-accent: linear-gradient(135deg, #3B82F6, #8B5CF6);
+  --gradient-card:   linear-gradient(135deg, rgba(19,26,41,0.9), rgba(11,15,25,0.7));
+
+  /* Status colours */
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-error:   #EF4444;
+  --color-info:    #3B82F6;
+
+  /* Loading screen */
+  --loading-bg:   #0B0F19;
+  --loading-text: #F8FAFC;
+  --loading-sub:  #64748B;
+  --loading-bar:  linear-gradient(90deg, #3B82F6, #8B5CF6);
+
+  /* Three.js colours exposed for JS read */
+  --three-primary:   #3B82F6;
+  --three-secondary: #8B5CF6;
+  --three-opacity:   0.35;
+}
+
+/* ── Light theme overrides ──────────────────────────────────── */
+[data-theme="light"] {
+  /* Backgrounds */
+  --bg-primary:     #FFFFFF;
+  --bg-secondary:   #F8FAFC;
+  --bg-card:        rgba(248, 250, 252, 0.85);
+  --bg-overlay:     rgba(0, 0, 0, 0.4);
+
+  /* Text */
+  --text-primary:   #0F172A;
+  --text-secondary: #475569;
+  --text-muted:     #94A3B8;
+
+  /* Accent */
+  --accent:         #2563EB;
+  --accent-hover:   #1D4ED8;
+  --accent-glow:    rgba(37, 99, 235, 0.15);
+  --accent-subtle:  rgba(37, 99, 235, 0.05);
+
+  /* Borders */
+  --border:         rgba(15, 23, 42, 0.08);
+  --border-hover:   rgba(37, 99, 235, 0.40);
+
+  /* Glass */
+  --glass:          rgba(255, 255, 255, 0.75);
+  --glass-border:   rgba(0, 0, 0, 0.06);
+
+  /* Shadows */
+  --shadow-sm:   0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md:   0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-lg:   0 8px 32px rgba(0, 0, 0, 0.12);
+  --shadow-xl:   0 20px 60px rgba(0, 0, 0, 0.15);
+  --shadow-glow: 0 0 30px rgba(37, 99, 235, 0.12);
+
+  /* Gradients */
+  --gradient-hero:   radial-gradient(ellipse 80% 60% at 60% 30%, rgba(37,99,235,0.08), transparent 60%),
+                     radial-gradient(ellipse 60% 40% at 20% 70%, rgba(109,40,217,0.05), transparent 50%);
+  --gradient-accent: linear-gradient(135deg, #2563EB, #7C3AED);
+  --gradient-card:   linear-gradient(135deg, rgba(248,250,252,0.95), rgba(241,245,249,0.8));
+
+  /* Status colours (same) */
+  --color-success: #059669;
+  --color-warning: #D97706;
+  --color-error:   #DC2626;
+  --color-info:    #2563EB;
+
+  /* Loading screen */
+  --loading-bg:   #FFFFFF;
+  --loading-text: #0F172A;
+  --loading-sub:  #94A3B8;
+  --loading-bar:  linear-gradient(90deg, #2563EB, #7C3AED);
+
+  /* Three.js colours */
+  --three-primary:   #2563EB;
+  --three-secondary: #7C3AED;
+  --three-opacity:   0.20;
+}
+
+/* ── Typography tokens ──────────────────────────────────────── */
+:root {
+  --font-display: 'Syne', 'Inter', sans-serif;
+  --font-body:    'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono:    'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+
+  --text-xs:   0.75rem;   /* 12px */
+  --text-sm:   0.875rem;  /* 14px */
+  --text-base: 1rem;      /* 16px */
+  --text-lg:   1.125rem;  /* 18px */
+  --text-xl:   1.25rem;   /* 20px */
+  --text-2xl:  1.5rem;    /* 24px */
+  --text-3xl:  1.875rem;  /* 30px */
+  --text-4xl:  2.25rem;   /* 36px */
+
+  --leading-tight:  1.15;
+  --leading-snug:   1.35;
+  --leading-normal: 1.60;
+  --leading-relaxed:1.75;
+  --leading-loose:  1.90;
+
+  --tracking-tight:  -0.04em;
+  --tracking-snug:   -0.02em;
+  --tracking-normal:  0em;
+  --tracking-wide:    0.05em;
+  --tracking-wider:   0.10em;
+  --tracking-widest:  0.15em;
+}
+
+/* ── Spacing tokens ─────────────────────────────────────────── */
+:root {
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.25rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+  /* Semantic aliases */
+  --space-xs:  var(--space-1);
+  --space-sm:  var(--space-2);
+  --space-md:  var(--space-4);
+  --space-lg:  var(--space-6);
+  --space-xl:  var(--space-8);
+  --space-2xl: var(--space-12);
+  --space-3xl: var(--space-16);
+  --space-4xl: var(--space-24);
+}
+
+/* ── Radius tokens ──────────────────────────────────────────── */
+:root {
+  --radius-xs:   4px;
+  --radius-sm:   6px;
+  --radius-md:   12px;
+  --radius-lg:   20px;
+  --radius-xl:   28px;
+  --radius-2xl:  36px;
+  --radius-full: 9999px;
+}
+
+/* ── Motion tokens ──────────────────────────────────────────── */
+:root {
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out:    cubic-bezier(0, 0, 0.2, 1);
+  --ease-in:     cubic-bezier(0.4, 0, 1, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  --duration-instant: 50ms;
+  --duration-fast:   150ms;
+  --duration-base:   300ms;
+  --duration-slow:   600ms;
+  --duration-slower: 900ms;
+  --duration-slowest:1200ms;
+}
+
+/* ── Layout tokens ──────────────────────────────────────────── */
+:root {
+  --nav-height:       72px;
+  --content-width:    1240px;
+  --content-narrow:   800px;
+  --content-wide:     1440px;
+  --sidebar-width:    280px;
+}
+
+/* ── Z-index scale ──────────────────────────────────────────── */
+:root {
+  --z-below:   -1;
+  --z-base:     0;
+  --z-raised:   10;
+  --z-sticky:   100;
+  --z-nav:      900;
+  --z-modal:    9800;
+  --z-toast:    9900;
+  --z-cursor:   9998;
+  --z-loading:  10000;
+}
+
+/* ── Smooth theme transitions ───────────────────────────────── */
+*,
+*::before,
+*::after {
+  transition-property: background-color, border-color, color, box-shadow;
+  transition-duration: var(--duration-slow);
+  transition-timing-function: var(--ease-smooth);
+}
+
+/* Reset transition on elements that should animate differently */
+.btn,
+.card,
+.nav-link,
+.tag,
+.filter-tab,
+.social-link,
+.project-card,
+.cert-card,
+.article-card,
+.contact-method,
+.timeline-dot {
+  transition: all var(--duration-base) var(--ease-smooth) !important;
+}
+
+/* Elements that should never theme-transition */
+#cursor-dot,
+#cursor-ring,
+.skill-bar,
+.loading-bar {
+  transition-property: transform, width, height, opacity, background !important;
+  transition-duration: 0ms !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}
