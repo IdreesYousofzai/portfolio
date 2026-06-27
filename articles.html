@@ -9,6 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="assets/css/main.css"/>
+  <link rel="stylesheet" href="assets/css/themes.css"/>
+  <link rel="stylesheet" href="assets/css/animations.css"/>
   <link rel="stylesheet" href="assets/css/components.css"/>
   <style>
     .articles-layout {
@@ -257,11 +259,12 @@
   <footer role="contentinfo"></footer>
 
   <script type="module">
-    import { initTheme, initCursor, initScrollProgress, initNavbar, initBackToTop, fetchData, debounce, showToast } from './assets/js/main.js';
+    import { initScrollProgress, initNavbar, initBackToTop, initReveal, fetchData, debounce, showToast } from './assets/js/main.js';
     import { injectLayout } from './assets/js/layout.js';
+    import { initCursor } from './assets/js/cursor.js';
+    import { initTheme } from './assets/js/theme.js';
     import { initCommandPalette } from './assets/js/command-palette.js';
     import { initHeroReveal, initTilt } from './assets/js/animations.js';
-    import { initReveal } from './assets/js/main.js';
 
     injectLayout();
     initTheme();
@@ -272,6 +275,7 @@
     initCursor();
     initHeroReveal();
     initReveal();
+    initTilt();
 
     let allArticles = [];
     let activeFilter = 'all';
@@ -404,18 +408,6 @@
       return new Date(str).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
     }
 
-    function initReveal() {
-      document.querySelectorAll('.reveal:not(.is-visible)').forEach(el => {
-        const obs = new IntersectionObserver(([entry]) => {
-          if (entry.isIntersecting) {
-            const d = el.dataset.delay || 0;
-            setTimeout(() => el.classList.add('is-visible'), d);
-            obs.unobserve(el);
-          }
-        }, { threshold: 0.1 });
-        obs.observe(el);
-      });
-    }
 
     init();
   </script>
